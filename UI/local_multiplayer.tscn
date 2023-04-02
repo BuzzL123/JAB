@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://f38rcdpyynvt"]
+
+[ext_resource type="LabelSettings" uid="uid://rclm1ydnbngs" path="res://UI/Buttons/Menu_buttons/MenuButtonLable.tres" id="1_iitpa"]
+[ext_resource type="Script" path="res://UI/retern_to_title.gd" id="1_yo5w5"]
+[ext_resource type="Texture2D" uid="uid://dmlr7lpr2emhe" path="res://Art/my art/UI/buton_off_short.png" id="2_48byh"]
+[ext_resource type="Texture2D" uid="uid://dqwybncotb5qm" path="res://Art/my art/UI/buton_on_short.png" id="3_s8q00"]
+[ext_resource type="Texture2D" uid="uid://xwi0mw5r7xvh" path="res://Art/my art/UI/button_hover_short.png" id="4_up5db"]
+[ext_resource type="Texture2D" uid="uid://bajc3mj561wla" path="res://Art/my art/UI/buton_on.png" id="7_dmmgt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5dkbk"]
+load_path = "res://.godot/imported/button_disabled_short.png-01e0c9fe4a265fcdb8b5b0a1fb804178.ctex"
+
+[node name="local multiplayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo5w5")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -574.0
+offset_top = -540.0
+offset_right = 574.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "local multiplayer"
+label_settings = ExtResource("1_iitpa")
+
+[node name="TextureButton" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("2_48byh")
+texture_pressed = ExtResource("3_s8q00")
+texture_hover = ExtResource("4_up5db")
+texture_disabled = SubResource("CompressedTexture2D_5dkbk")
+texture_focused = ExtResource("7_dmmgt")
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/TextureButton"]
+layout_mode = 2
+offset_top = -16.0
+offset_right = 300.0
+offset_bottom = 96.0
+text = "Back"
+label_settings = ExtResource("1_iitpa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c25bi0nhqgux7"]
+
+[ext_resource type="PackedScene" uid="uid://b17782eqmhqq2" path="res://UI/Buttons/Menu_buttons/MenuButton.tscn" id="1_51a4r"]
+
+[node name="local_multiplayer" instance=ExtResource("1_51a4r")]
+
+[node name="Label" parent="." index="0"]
+text = "local multiplayer"

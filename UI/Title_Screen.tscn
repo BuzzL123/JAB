@@ -1,0 +1,239 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8p6p7fabccby"]
+
+[ext_resource type="Script" path="res://UI/Title_Screen.gd" id="1_r8a35"]
+[ext_resource type="PackedScene" uid="uid://c25bi0nhqgux7" path="res://UI/Buttons/Menu_buttons/local_multiplayer_button.tscn" id="2_0o63b"]
+[ext_resource type="Texture2D" uid="uid://bl7kfgsfh6ado" path="res://Art/my art/JAB!_logo.png" id="2_ofraw"]
+[ext_resource type="PackedScene" uid="uid://qc12uus7oq5r" path="res://UI/Buttons/Menu_buttons/options_button.tscn" id="3_s5pqq"]
+[ext_resource type="PackedScene" uid="uid://x4usss1cvbs5" path="res://UI/Buttons/Menu_buttons/quit_button.tscn" id="4_jovrl"]
+[ext_resource type="LabelSettings" uid="uid://bumqkgyuxj184" path="res://UI/Buttons/Menu_buttons/VersionLabel.tres" id="5_mqf5w"]
+[ext_resource type="Texture2D" uid="uid://b7cu3rhdxkxsu" path="res://Art/Free/Terrain/Terrain (16x16).png" id="5_rf8u3"]
+[ext_resource type="PackedScene" uid="uid://d2jd4kgm6of3u" path="res://UI/options.tscn" id="7_pvcnb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_563ac"]
+texture = ExtResource("5_rf8u3")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+17:0/0 = 0
+18:0/0 = 0
+19:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+17:1/0 = 0
+18:1/0 = 0
+19:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+17:2/0 = 0
+18:2/0 = 0
+19:2/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+17:4/0 = 0
+18:4/0 = 0
+19:4/0 = 0
+20:4/0 = 0
+21:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+20:5/0 = 0
+21:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+17:8/0 = 0
+18:8/0 = 0
+19:8/0 = 0
+20:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+17:9/0 = 0
+18:9/0 = 0
+19:9/0 = 0
+20:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+20:10/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6qlvj"]
+sources/1 = SubResource("TileSetAtlasSource_563ac")
+
+[node name="Title_screen" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8a35")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 1800.0
+offset_bottom = 1000.0
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_ofraw")
+stretch_mode = 3
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="local_multiplayer" parent="Menu/CenterRow/Buttons" instance=ExtResource("2_0o63b")]
+custom_minimum_size = Vector2(700, 75)
+layout_mode = 2
+focus_neighbor_top = NodePath("../quit")
+focus_neighbor_bottom = NodePath("../options")
+
+[node name="options" parent="Menu/CenterRow/Buttons" instance=ExtResource("3_s5pqq")]
+custom_minimum_size = Vector2(700, 75)
+layout_mode = 2
+focus_neighbor_top = NodePath("../local_multiplayer")
+focus_neighbor_bottom = NodePath("../quit")
+
+[node name="quit" parent="Menu/CenterRow/Buttons" instance=ExtResource("4_jovrl")]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+focus_neighbor_top = NodePath("../options")
+focus_neighbor_bottom = NodePath("../local_multiplayer")
+
+[node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="TileMap" type="TileMap" parent="Menu/CenterRow/CenterContainer"]
+visible = false
+position = Vector2(-173, -637)
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_6qlvj")
+format = 2
+layer_0/tile_data = PackedInt32Array(983062, 524289, 0, 983061, 458753, 0, 983060, 458753, 0, 1048596, 655361, 1, 1048595, 458753, 0, 1048594, 458753, 0, 1048593, 458753, 0, 1048592, 458753, 0, 1048591, 458753, 0, 1048590, 458753, 0, 1048589, 393217, 0, 1114125, 458753, 0, 1114124, 458753, 0, 1114123, 458753, 0, 1114122, 458753, 0, 1179658, 458753, 0, 1179657, 458753, 0, 1179659, 655361, 1, 1114126, 655361, 1, 1048597, 458753, 1, 1114133, 458753, 1, 1179669, 458753, 1, 1245205, 458753, 1, 1310741, 589825, 0, 1310740, 458753, 1, 1310739, 458753, 1, 1376275, 589825, 0, 1376274, 458753, 1, 1376273, 458753, 1, 1376272, 458753, 1, 1376271, 458753, 1, 1376270, 458753, 1, 1376269, 458753, 1, 1376268, 458753, 1, 1376267, 458753, 1, 1376266, 655361, 0, 1310730, 458753, 1, 1310729, 655361, 0, 1245193, 458753, 1, 1245192, 655361, 0, 1179656, 458753, 0, 1048598, 524289, 1, 1114134, 524289, 1, 1179670, 524289, 1, 1245206, 524289, 1, 1310742, 524289, 2, 1376277, 524289, 2, 1376276, 458753, 2, 1441811, 524289, 2, 1441810, 458753, 2, 1441809, 458753, 2, 1441808, 458753, 2, 1441807, 458753, 2, 1441806, 458753, 2, 1441805, 458753, 2, 1441804, 458753, 2, 1441803, 458753, 2, 1441802, 393217, 2, 1376265, 393217, 2, 1310728, 393217, 2, 1245191, 393217, 2, 1179655, 393217, 0, 1245198, 458753, 1, 1179662, 458753, 1, 1179661, 458753, 1, 1179660, 458753, 1, 1245196, 458753, 1, 1245195, 458753, 1, 1245194, 458753, 1, 1310731, 458753, 1, 1310732, 458753, 1, 1310733, 458753, 1, 1245197, 458753, 1, 1310734, 458753, 1, 1310735, 458753, 1, 1245199, 458753, 1, 1179663, 458753, 1, 1114127, 458753, 1, 1114128, 458753, 1, 1179664, 458753, 1, 1245200, 458753, 1, 1310736, 458753, 1, 1310737, 458753, 1, 1245201, 458753, 1, 1179665, 458753, 1, 1114129, 458753, 1, 1114130, 458753, 1, 1179666, 458753, 1, 1245202, 458753, 1, 1310738, 458753, 1, 1245203, 458753, 1, 1179667, 458753, 1, 1114131, 458753, 1, 1114132, 458753, 1, 1179668, 458753, 1, 1245204, 458753, 1, 983059, 393217, 0)
+
+[node name="PopupPanel" parent="Menu/CenterRow/CenterContainer" instance=ExtResource("7_pvcnb")]
+
+[node name="VersionLabel" type="Label" parent="Menu"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Version 0.0.0
+Dreamworld Dynamics Studio"
+label_settings = ExtResource("5_mqf5w")
+
+[connection signal="pressed" from="Menu/CenterRow/Buttons/local_multiplayer" to="." method="_on_local_multiplayer_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Menu/CenterRow/Buttons/quit" to="." method="_on_quit_pressed"]

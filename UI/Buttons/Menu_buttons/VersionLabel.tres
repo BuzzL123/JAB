@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bumqkgyuxj184"]
+
+[ext_resource type="FontFile" uid="uid://c1f0qux2f6oay" path="res://Art/my art/UI/Minecraft.ttf" id="1_abj4k"]
+
+[resource]
+font = ExtResource("1_abj4k")
+font_size = 32
+shadow_color = Color(0, 0, 0, 1)

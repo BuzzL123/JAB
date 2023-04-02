@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv8i3y3pdkgck"]
+
+[ext_resource type="Script" path="res://up_dash.gd" id="1_1msng"]
+
+[node name="up_dash" type="Node2D"]
+script = ExtResource("1_1msng")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_up_dash_timer_timeout"]

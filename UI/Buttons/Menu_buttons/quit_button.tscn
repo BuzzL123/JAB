@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://x4usss1cvbs5"]
+
+[ext_resource type="PackedScene" uid="uid://b17782eqmhqq2" path="res://UI/Buttons/Menu_buttons/MenuButton.tscn" id="1_cenik"]
+
+[node name="quit" instance=ExtResource("1_cenik")]
+
+[node name="Label" parent="." index="0"]
+text = "quit"
