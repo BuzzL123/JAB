@@ -2,23 +2,23 @@ extends CharacterBody2D
 
 @export var player_id = 1
 
-
 const NORMAL_SPEED : int = 600
-const JUMP_HEIGHT : int = -1000
-const GRAVITY : int = 3000
+const NORMAL_JUMP_HEIGHT : int = -1000
+const GRAVITY : int = 4000
 #const MAX_HEALTH = 100
 const MAX_JUMPS : int= 2
 
 var SPEED = NORMAL_SPEED
 const Dash_speed = 1600
 const dash_length = 0.1
-
+var Dash_up = NORMAL_JUMP_HEIGHT 
 
 var health : int = 100
 var jumps : int = 0
 
 var knockback : Vector2 = Vector2.ZERO
 var knockbackTween
+
 @onready var dash = $Dash
 @onready var Hp_Bar = $TextureProgressBar
 @onready var anim = $AnimationPlayer
@@ -28,38 +28,29 @@ var knockbackTween
 
 
 func _ready():
-	print(position)
-
-func _physics_process(delta):
 	Hp_Bar.value = health
+	$AnimationTree.active = true
+	
+func _physics_process(delta):
+	
+
 	
 	crouch()
-
+	
 	if Input.is_action_just_pressed("dash_%s" % [player_id]) && dash.can_dash && !dash.is_dashing():
-#		anim.play("dash")
-#		await get_tree().create_timer(0.1).timeout
-#		anim.stop()
+
 		dash.start_dash(dash_length)
-		set_collision_mask_value(3, false)
-		await get_tree().create_timer(2).timeout
-		set_collision_mask_value(3, true)
-	var SPEED = Dash_speed if dash.is_dashing() else NORMAL_SPEED 
+		anim.play("dash")
+#		set_collision_mask_value(3, false)
+#		await get_tree().create_timer(2).timeout
+#		set_collision_mask_value(3, true)
+	var SPEED = Dash_speed if dash.is_dashing() else NORMAL_SPEED
+	var JUMP_HEIGHT = -Dash_speed if dash.is_dashing() else NORMAL_JUMP_HEIGHT
+
 
 	
+	
 	# Add the gravity.
-	if not is_on_floor():
-		
-		if(velocity.y <= 0):
-			animateted_sprite.animation = "jump"
-		else:
-			animateted_sprite.animation = "fall"
-	#else:
-		
-		#if(velocity.x == 0):
-			#animateted_sprite.animation = "idle"
-		#elif(velocity.x != 0):
-			#animateted_sprite.animation = "run"
-		
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump_%s" % [player_id]) and (is_on_floor() or jumps < MAX_JUMPS):
 		velocity.y = JUMP_HEIGHT
@@ -67,11 +58,20 @@ func _physics_process(delta):
 		set_collision_mask_value(3, false)
 		await get_tree().create_timer(0.3).timeout
 		set_collision_mask_value(3, true)
-	
+		$AnimationTree.set("parameters/in_air/current", 1)
+	if Input.is_action_just_released("jump_%s" % [player_id]):
+		$AnimationTree.set("parameters/in_air/current", 0)
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left_%s" % [player_id], "right_%s" % [player_id])
 	velocity.x = direction * SPEED + knockback.x
+	if is_on_floor():
+
+		if(velocity.x == 0):
+			$AnimationTree.set("parameters/Movement/current",int(direction.langth() > 50))
+		elif(velocity.x >= 0):
+			$AnimationTree.set("parameters/Movement/current",1 + abs(direction.x)/100)
+			$AnimationTree.set("parameters/in_air_state/current", int(!$RayCast2D.is_colliding()))
 	if direction:
 		
 		
@@ -81,7 +81,6 @@ func _physics_process(delta):
 			scale.x = scale.y * 1
 			
 	#else:
-		
 
 	
 	# Apply gravity
@@ -124,13 +123,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func take_damage(damage : int, knockback_strength : Vector2 = Vector2(0,0), stop_time : float = 0.25):
 	health -= damage
+
 	if health <= 0:
 		Hp_Bar.value = 0
 		health = 0
-		animateted_sprite.animation = "dead"
+		anim.play("Dead")
 		die()
 
 	elif (knockback_strength != Vector2(0,0)):
+
 		knockback = knockback_strength
 		
 		knockbackTween = get_tree().create_tween()
@@ -138,8 +139,15 @@ func take_damage(damage : int, knockback_strength : Vector2 = Vector2(0,0), stop
 		
 		animateted_sprite.modulate = Color(1,0,0,1)
 		knockbackTween.tween_property(animateted_sprite, "modulate", Color(1,1,1,1), stop_time)
-	print("Player_%s" % [player_id] + "'s health is: " + str(health))
+		await get_tree().create_timer(0.21).timeout
+		set_physics_process(false)
+		set_process_unhandled_input(false)
+		await get_tree().create_timer(.21).timeout
+		set_physics_process(true)
+		set_process_unhandled_input(true)
 		
+	print("Player_%s" % [player_id] + "'s health is: " + str(health))
+
 		
 	
 		

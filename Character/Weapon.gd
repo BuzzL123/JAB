@@ -3,14 +3,15 @@ extends Area2D
 const damage = 10
 
 
-@onready var anim = $AnimationPlayer
+@onready var anim = $"../AnimationPlayer"
 
 
 func attack():
-	anim.play("Knife_jab")
+	anim.play("JAB!")
 
 func _on_body_entered(body) -> void:
 	if body.has_method("take_damage"):
+		
 		var pos = body.get_position()
 		var direction = pos - global_position
 		if body.is_on_floor():

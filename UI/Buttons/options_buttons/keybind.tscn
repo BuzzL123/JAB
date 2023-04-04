@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5a6vy2qc1ku3"]
+
+[ext_resource type="Script" path="res://Keybind.gd" id="1_g8rh2"]
+[ext_resource type="PackedScene" uid="uid://qgwnafwu1fm3" path="res://UI/Buttons/options_buttons/keybind_action.tscn" id="2_ew3ca"]
+
+[node name="Keybind" type="VBoxContainer" groups=["keybinds"]]
+offset_right = 106.0
+offset_bottom = 40.0
+script = ExtResource("1_g8rh2")
+KeybindAction = ExtResource("2_ew3ca")
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Keybind"
+
+[node name="add" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "add"
+
+[connection signal="pressed" from="HBoxContainer/add" to="." method="_on_add_pressed"]
