@@ -1,9 +1,31 @@
 [gd_scene load_steps=2 format=3 uid="uid://cv8i3y3pdkgck"]
 
-[ext_resource type="Script" path="res://up_dash.gd" id="1_1msng"]
+[sub_resource type="GDScript" id="GDScript_xkv7q"]
+script/source = "#extends Node2D
+#const dash_delay = 0.4
+#
+#var can_dash = true
+#@onready var timer = $Dash_Timer
+#
+#func start_dash(dur):
+#	timer.wait_time = dur
+#	timer.start()
+#
+#func is_dashing():
+#	return !timer.is_stopped()
+#
+#func end_dash():
+#	can_dash = false
+#	await get_tree().create_timer(dash_delay).timeout
+#	can_dash = true
+#
+#
+#func _on_up_dash_timer_timeout():
+#	end_dash()
+"
 
 [node name="up_dash" type="Node2D"]
-script = ExtResource("1_1msng")
+script = SubResource("GDScript_xkv7q")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

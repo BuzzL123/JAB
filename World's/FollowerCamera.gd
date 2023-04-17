@@ -1,3 +1,4 @@
+# ignor for now
 extends Camera2D
 
 @export_range(0.1, 0.5) var zoom_offset: float = 0.4

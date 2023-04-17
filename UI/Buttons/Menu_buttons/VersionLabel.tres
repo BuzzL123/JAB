@@ -4,5 +4,5 @@
 
 [resource]
 font = ExtResource("1_abj4k")
-font_size = 32
+font_size = 24
 shadow_color = Color(0, 0, 0, 1)
