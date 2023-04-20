@@ -21,7 +21,8 @@ func _state_logic(delta):
 #	parent._apply_movement()
 	pass
 func _get_transition(delta):
-	parent.move_and_slide()
+	# Move the player based on its current velocity
+#	parent.move_and_slide()
 
 	match state:
 		states.IDLE:

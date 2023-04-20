@@ -588,7 +588,7 @@ texture = ExtResource("2_435sq")
 14:7/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_i38nv"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_owkck")
 
@@ -1084,17 +1084,16 @@ drag_right_margin = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="Player_1" parent="." instance=ExtResource("1_jklwt")]
-position = Vector2(599, 702)
-
-[node name="Player_2" parent="." instance=ExtResource("1_jklwt")]
-position = Vector2(1318, 702)
-slide_on_ceiling = false
-player_id = 2
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 polygon = PackedVector2Array(-541, -461, 2462, -457, 2460, 1477, -545, 1482, -551, 1657, 2590, 1664, 2536, -565, -619, -576, -649, 1649, -551, 1647)
+
+[node name="Player_1" parent="." instance=ExtResource("1_jklwt")]
+position = Vector2(588, 702)
+
+[node name="Player_2" parent="." instance=ExtResource("1_jklwt")]
+position = Vector2(1318, 702)
+player_id = 2
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

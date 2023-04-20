@@ -1,21 +1,22 @@
-[gd_scene load_steps=77 format=3 uid="uid://duxr8m8uisf2j"]
+[gd_scene load_steps=89 format=3 uid="uid://duxr8m8uisf2j"]
 
 [ext_resource type="Script" path="res://Character/player.gd" id="1_xxbmx"]
 [ext_resource type="Texture2D" uid="uid://hom1lut5t58p" path="res://Art/AssetPack-V1/Sprite Sheets/player jump 48x48.png" id="2_bf1tp"]
 [ext_resource type="Texture2D" uid="uid://cxvrm7sdpc3ek" path="res://Art/AssetPack-V1/Sprite Sheets/Character jab 48x48.png" id="2_h6bmc"]
 [ext_resource type="Texture2D" uid="uid://5j31j2yh2s8g" path="res://Art/Asset Pack-V3/Player Death/Player Death 64x64.png" id="2_pkcny"]
+[ext_resource type="Script" path="res://Character/playerFSM.gd" id="2_w7gop"]
 [ext_resource type="Texture2D" uid="uid://dt8hl377dlv5s" path="res://Art/Asset Pack-V2 (Final)/Asset Pack-V2/Air Spin/player air spin 48x48.png" id="3_kantv"]
 [ext_resource type="Texture2D" uid="uid://0pb525cuxhwn" path="res://Art/AssetPack-V1/Sprite Sheets/Character Idle 48x48.png" id="3_tiadq"]
 [ext_resource type="Texture2D" uid="uid://b82sy4frf4p5b" path="res://Art/Asset Pack-V2 (Final)/Asset Pack-V2/Crouch-Walk/Crouch-Idle/Player Crouch-Idle 48x48.png" id="4_qwwr4"]
 [ext_resource type="Texture2D" uid="uid://c224bajj88fif" path="res://Art/AssetPack-V1/Sprite Sheets/run cycle 48x48.png" id="4_um8sx"]
 [ext_resource type="Script" path="res://Character/Weapon.gd" id="8_k23g6"]
+[ext_resource type="Texture2D" uid="uid://dmqx7ef8ehjcs" path="res://Art/my art/noting.png" id="9_i8e0i"]
 [ext_resource type="Texture2D" uid="uid://sfjrwv42smgw" path="res://Art/Pixel Health Bar Asset Pack 1 by Adwit Rahman/Pixel Health Bar 1/Pixel1_Healthbar_0002_pixel1_border.png" id="10_k76wh"]
+[ext_resource type="PackedScene" uid="uid://cjmolddfgfq6c" path="res://particles/death_particles.tscn" id="10_rebvq"]
 [ext_resource type="Texture2D" uid="uid://qpkw88ej3sc6" path="res://Art/Pixel Health Bar Asset Pack 1 by Adwit Rahman/Pixel Health Bar 1/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="11_7vatq"]
 [ext_resource type="PackedScene" uid="uid://bx2fl7ck2lk7l" path="res://Character/dash.tscn" id="12_d87hm"]
+[ext_resource type="PackedScene" uid="uid://chet007dpjn71" path="res://particles/blood_v.tscn" id="12_tun3x"]
 [ext_resource type="LabelSettings" uid="uid://bumqkgyuxj184" path="res://UI/Buttons/Menu_buttons/VersionLabel.tres" id="13_gy4sh"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp37k"]
-size = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p06p"]
 size = Vector2(14, 29)
@@ -318,6 +319,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("9_i8e0i")
+}],
+"loop": true,
+"name": &"nothing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qse5j")
 }, {
 "duration": 1.0,
@@ -356,10 +365,10 @@ tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0166667),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.0166667, 0.716668),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [&"dead"]
+"values": [&"dead", &"nothing"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -368,15 +377,39 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0166667, 0.1, 0.183333, 0.283333, 0.366667, 0.466667, 0.583333, 0.733333, 0.85),
-"transitions": PackedFloat32Array(1, 0.129408, 0.574349, 0.466517, 2.37841, 0.757858, 0.329877, 238.856, 0.000560887),
+"times": PackedFloat32Array(0.0166667, 0.1, 0.183333, 0.283333, 0.366667, 0.466667, 0.583333, 0.666668, 0.716668),
+"transitions": PackedFloat32Array(1, 0.129408, 0.574349, 0.466517, 2.37841, 0.757858, 0.615572, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 8, 9]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../death_Particles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.700001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Weapon/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_yqy81"]
 resource_name = "JAB!"
-length = 0.30001
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -396,7 +429,7 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0833333, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1e-05),
 "update": 1,
 "values": [0, 2]
@@ -408,34 +441,10 @@ tracks/2/path = NodePath("../Weapon/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../CollisionBox2:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../CollisionBox:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_36gq5"]
@@ -467,19 +476,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Weapon/CollisionShape2D:disabled")
+tracks/2/path = NodePath("../death_Particles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../CollisionBox2:disabled")
+tracks/3/path = NodePath("../Weapon/blood_v:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -491,11 +500,27 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../CollisionBox:disabled")
+tracks/4/path = NodePath("../Weapon/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hhr4w"]
+resource_name = "V_blood"
+length = 0.30001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Weapon/blood_v:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -679,6 +704,7 @@ _data = {
 "Dead": SubResource("Animation_h1hwc"),
 "JAB!": SubResource("Animation_yqy81"),
 "RESET": SubResource("Animation_36gq5"),
+"V_blood": SubResource("Animation_hhr4w"),
 "crouch": SubResource("Animation_tsigb"),
 "dash": SubResource("Animation_fi10p"),
 "fall": SubResource("Animation_kkh8s"),
@@ -689,6 +715,21 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ubll"]
 size = Vector2(5, 2)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_inav2"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_nu7yt"]
+offsets = PackedFloat32Array(0, 0.0881954, 0.200814, 0.256445, 0.305292, 0.34057, 0.408412, 0.4654, 0.525102, 0.61194, 0.694708, 0.789688, 0.858887, 0.938942, 1)
+colors = PackedColorArray(0.854902, 0.921569, 0.980392, 0, 0.338399, 0.968954, 0.895098, 0.604167, 0, 1, 0.839216, 1, 0.484986, 0.782411, 0.923562, 1, 0.924504, 0.585221, 1, 1, 0.68932, 1, 0.950048, 1, 0.961762, 0.789917, 1, 1, 0.631579, 1, 0.940764, 1, 1, 1, 1, 1, 0.332821, 0.85068, 0.897098, 1, 0, 1, 0.839216, 1, 0.924504, 0.585221, 1, 1, 0.414178, 0.814179, 0.911247, 1, 0.575917, 0.865021, 0.93584, 0.622951, 0.576471, 0.866667, 0.937255, 0)
+
+[sub_resource type="Curve" id="Curve_adu5s"]
+max_value = 200.0
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hkhx6"]
 animation = &"run"
@@ -710,6 +751,12 @@ input_1/name = "run"
 input_1/auto_advance = false
 input_1/reset = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_um46x"]
+animation = &"JAB!"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aya2p"]
+animation = &"Dead"
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_tslbq"]
 input_0/name = "falling"
 input_0/auto_advance = false
@@ -726,7 +773,24 @@ input_1/name = "air"
 input_1/auto_advance = false
 input_1/reset = true
 
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_eqyav"]
+input_0/name = "attacking"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "not_attacking"
+input_1/auto_advance = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_fstpr"]
+input_0/name = "alive"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "dead"
+input_1/auto_advance = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_q6ko2"]
+graph_offset = Vector2(-23.781, 50.361)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_4gbmm")
 nodes/Animation/position = Vector2(-180, 140)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_hkhx6")
@@ -737,37 +801,43 @@ nodes/Animation/position = Vector2(-180, 140)
 "nodes/Animation 4/position" = Vector2(-20, 640)
 nodes/Movement/node = SubResource("AnimationNodeTransition_oa4u5")
 nodes/Movement/position = Vector2(160, 180)
+nodes/attacking/node = SubResource("AnimationNodeAnimation_um46x")
+nodes/attacking/position = Vector2(400, 80)
+nodes/dead/node = SubResource("AnimationNodeAnimation_aya2p")
+nodes/dead/position = Vector2(820, 460)
 nodes/in_air/node = SubResource("AnimationNodeTransition_tslbq")
 nodes/in_air/position = Vector2(220, 420)
 nodes/in_air_state/node = SubResource("AnimationNodeTransition_1nbqn")
 nodes/in_air_state/position = Vector2(400, 220)
-nodes/output/position = Vector2(660, 140)
-node_connections = [&"output", 0, &"in_air_state", &"Movement", 0, &"Animation", &"Movement", 1, &"Animation 2", &"in_air", 0, &"Animation 3", &"in_air", 1, &"Animation 4", &"in_air_state", 0, &"Movement", &"in_air_state", 1, &"in_air"]
+nodes/is_attacking/node = SubResource("AnimationNodeTransition_eqyav")
+nodes/is_attacking/position = Vector2(760, 200)
+nodes/is_dead/node = SubResource("AnimationNodeTransition_fstpr")
+nodes/is_dead/position = Vector2(1000, 200)
+nodes/output/position = Vector2(1260, 80)
+node_connections = [&"output", 0, &"is_dead", &"Movement", 0, &"Animation", &"Movement", 1, &"Animation 2", &"in_air", 0, &"Animation 3", &"in_air", 1, &"Animation 4", &"in_air_state", 0, &"Movement", &"in_air_state", 1, &"in_air", &"is_attacking", 0, &"attacking", &"is_attacking", 1, &"in_air_state", &"is_dead", 0, &"is_attacking", &"is_dead", 1, &"dead"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u1glb"]
+size = Vector2(0, 0)
 
 [node name="Player_1" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(2, 2)
-collision_mask = 5
-platform_wall_layers = 2
-safe_margin = 0.001
+collision_mask = 7
+platform_wall_layers = 6
 script = ExtResource("1_xxbmx")
 metadata/SPEED = 0
 
 [node name="StateMachine" type="Node" parent="."]
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, 16)
-shape = SubResource("RectangleShape2D_dp37k")
-disabled = true
+script = ExtResource("2_w7gop")
 
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1.5)
 shape = SubResource("RectangleShape2D_3p06p")
-disabled = true
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="CollisionBox2" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 6.5)
 shape = SubResource("RectangleShape2D_vcsux")
+disabled = true
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -791,9 +861,18 @@ shape = SubResource("RectangleShape2D_6ubll")
 disabled = true
 debug_color = Color(1, 0, 0.121569, 0.258824)
 
-[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
-position = Vector2(0, 10)
-rotation = 1.5708
+[node name="blood_v" parent="Weapon" instance=ExtResource("12_tun3x")]
+
+[node name="death_Particles" parent="." instance=ExtResource("10_rebvq")]
+material = SubResource("CanvasItemMaterial_inav2")
+position = Vector2(9.5, 14.5)
+scale = Vector2(0.5, 0.5)
+gravity = Vector2(0, 20)
+initial_velocity_max = 101.01
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+color_ramp = SubResource("Gradient_nu7yt")
+anim_speed_curve = SubResource("Curve_adu5s")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
 offset_left = -21.0
@@ -809,41 +888,47 @@ texture_progress_offset = Vector2(2, 1)
 [node name="Dash" parent="." instance=ExtResource("12_d87hm")]
 visible = false
 
-[node name="AnimationTree (not in use)" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_q6ko2")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/Movement/current_state = "idle"
 parameters/Movement/transition_request = ""
 parameters/Movement/current_index = 0
-parameters/in_air/current_state = "falling"
+parameters/in_air/current_state = "jumping"
 parameters/in_air/transition_request = ""
-parameters/in_air/current_index = 0
+parameters/in_air/current_index = 1
 parameters/in_air_state/current_state = "air"
 parameters/in_air_state/transition_request = ""
 parameters/in_air_state/current_index = 1
+parameters/is_attacking/current_state = "attacking"
+parameters/is_attacking/transition_request = ""
+parameters/is_attacking/current_index = 0
+parameters/is_dead/current_state = "alive"
+parameters/is_dead/transition_request = ""
+parameters/is_dead/current_index = 0
 
 [node name="RayCasts" type="Node2D" parent="."]
 
 [node name="GroundL" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-8, 12)
 target_position = Vector2(0, 5)
-collision_mask = 6
+collision_mask = 7
 
 [node name="GroundR" type="RayCast2D" parent="RayCasts"]
 position = Vector2(5.5, 12)
 target_position = Vector2(0, 5)
-collision_mask = 6
+collision_mask = 7
 
 [node name="Ledge_grab_F" type="RayCast2D" parent="RayCasts"]
 position = Vector2(5, -9)
 target_position = Vector2(7, 0)
-collision_mask = 4
+collision_mask = 8
 
 [node name="Ledge_grab_D" type="RayCast2D" parent="RayCasts"]
 position = Vector2(-3, -9.5)
 target_position = Vector2(-9, 0)
-collision_mask = 4
+collision_mask = 8
 
 [node name="Frames" type="Label" parent="."]
 visible = false
@@ -862,5 +947,9 @@ offset_right = 15.0
 offset_bottom = -16.5
 text = "test"
 label_settings = ExtResource("13_gy4sh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_u1glb")
 
 [connection signal="body_entered" from="Weapon" to="Weapon" method="_on_body_entered"]

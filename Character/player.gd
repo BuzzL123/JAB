@@ -31,6 +31,7 @@ var knockbackTween
 @onready var dash = $Dash
 @onready var Hp_Bar = $TextureProgressBar
 @onready var anim = $AnimationPlayer
+@onready var anim_tree = $AnimationTree
 @onready var weapon = $Weapon
 @onready var sprite = $Sprite
 @onready var RayCasts = $RayCasts
@@ -90,11 +91,13 @@ func _apply_movement():
 	# Handle crouch
 	if Input.is_action_just_pressed("crouch_%s" % [player_id]):
 		set_collision_mask_value(3, false)
-		
+		$CollisionBox.set_deferred("disabled", true)
+		$CollisionBox2.set_deferred("disabled", false)
 		
 	if Input.is_action_just_released("crouch_%s" % [player_id]):
 		set_collision_mask_value(3, true)
-		
+		$CollisionBox.set_deferred("disabled", false)
+		$CollisionBox2.set_deferred("disabled", true)
 	# Move the player and clamp their velocity to prevent excessive movement.
 	# Move the player based on its current velocity
 	move_and_slide()
@@ -114,6 +117,7 @@ func _apply_movement():
 # Get the input direction and handle movement and sprite flipping.
 	var direction = Input.get_axis("left_%s" % [player_id], "right_%s" % [player_id])
 	velocity.x = direction * SPEED + knockback.x
+	
 	if direction:
 
 
@@ -182,12 +186,17 @@ func collect_powerup():
 	
 func die():
 	# Handle player death
+#	velocity.x = 0
+#	velocity.y = 0
+	Hp_Bar.hide()
+	anim.play("Dead")
 	set_physics_process(false)
 	set_process_unhandled_input(false)
 	$CollisionBox.set_deferred("disabled", true)
-	$CollisionShape2D2.set_deferred("disabled", false)
-	await get_tree().create_timer(2).timeout
+	$CollisionBox2.set_deferred("disabled", true)
+	await get_tree().create_timer(5).timeout
 	queue_free()
+
 	#get_tree().change_scene_to_file("res://UI/GameOver.tscn")
 
 
