@@ -16,9 +16,9 @@ func _ready():
 	call_deferred("set_state", states.IDLE)
 
 func _state_logic(delta):
-#	parent._physics_process(delta)
 #	parent._apply_gravity(delta)
 #	parent._apply_movement()
+#	parent.take_damage()
 	pass
 func _get_transition(delta):
 	# Move the player based on its current velocity
@@ -26,7 +26,14 @@ func _get_transition(delta):
 
 	match state:
 		states.IDLE:
-			pass
+			if not parent.is_on_floor() && !parent.health == 0:
+				if(parent.velocity.y >= 0) :
+					states.JUMP
+				elif(parent.velocity.y <= 0):
+					states.FALL
+			elif parent.is_on_floor() && !parent.health == 0:
+				if(parent.velocity.x == 0 ) :
+					states.IDLE
 
 		states.RUN:
 			pass

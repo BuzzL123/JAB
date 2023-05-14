@@ -1,13 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://b8p6p7fabccby"]
+[gd_scene load_steps=13 format=3 uid="uid://b8p6p7fabccby"]
 
 [ext_resource type="Script" path="res://UI/Title_Screen.gd" id="1_r8a35"]
 [ext_resource type="PackedScene" uid="uid://c25bi0nhqgux7" path="res://UI/Buttons/Menu_buttons/local_multiplayer_button.tscn" id="2_0o63b"]
 [ext_resource type="Texture2D" uid="uid://bl7kfgsfh6ado" path="res://Art/my art/JAB!_logo.png" id="2_ofraw"]
+[ext_resource type="Theme" uid="uid://b071l4h825547" path="res://UI/themes/menu_theme.tres" id="3_q8hsy"]
 [ext_resource type="PackedScene" uid="uid://qc12uus7oq5r" path="res://UI/Buttons/Menu_buttons/options_button.tscn" id="3_s5pqq"]
 [ext_resource type="PackedScene" uid="uid://x4usss1cvbs5" path="res://UI/Buttons/Menu_buttons/quit_button.tscn" id="4_jovrl"]
 [ext_resource type="LabelSettings" uid="uid://bumqkgyuxj184" path="res://UI/Buttons/Menu_buttons/VersionLabel.tres" id="5_mqf5w"]
 [ext_resource type="Texture2D" uid="uid://b7cu3rhdxkxsu" path="res://Art/Free/Terrain/Terrain (16x16).png" id="5_rf8u3"]
 [ext_resource type="PackedScene" uid="uid://d2jd4kgm6of3u" path="res://UI/options.tscn" id="7_pvcnb"]
+
+[sub_resource type="GDScript" id="GDScript_6gvft"]
+script/source = "extends Button
+
+@export var scene_to_load : String
+
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_563ac"]
 texture = ExtResource("5_rf8u3")
@@ -191,26 +199,32 @@ size_flags_vertical = 3
 
 [node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme = ExtResource("3_q8hsy")
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="local_multiplayer" parent="Menu/CenterRow/Buttons" instance=ExtResource("2_0o63b")]
-custom_minimum_size = Vector2(700, 75)
 layout_mode = 2
 focus_neighbor_top = NodePath("../quit")
 focus_neighbor_bottom = NodePath("../options")
+theme = null
+text = "Local multiplayer"
+script = SubResource("GDScript_6gvft")
 
 [node name="options" parent="Menu/CenterRow/Buttons" instance=ExtResource("3_s5pqq")]
-custom_minimum_size = Vector2(700, 75)
 layout_mode = 2
 focus_neighbor_top = NodePath("../local_multiplayer")
 focus_neighbor_bottom = NodePath("../quit")
+theme = null
+script = SubResource("GDScript_6gvft")
 
 [node name="quit" parent="Menu/CenterRow/Buttons" instance=ExtResource("4_jovrl")]
-custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 focus_neighbor_top = NodePath("../options")
 focus_neighbor_bottom = NodePath("../local_multiplayer")
+theme = null
+text = "Quit"
+script = SubResource("GDScript_6gvft")
 
 [node name="CenterContainer" type="CenterContainer" parent="Menu/CenterRow"]
 layout_mode = 2

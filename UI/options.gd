@@ -10,7 +10,13 @@ const KEYBINDS := [
 	"jump_1",
 	"crouch_1",
 	"JAB!_1",
-	"dash_1"
+	"dash_1",
+	"left_2",
+	"right_2",
+	"jump_2",
+	"crouch_2",
+	"JAB!_2",
+	"dash_2"
 ]
 
 @export var Keybind: PackedScene
@@ -27,6 +33,8 @@ var default_keybinds := {}
 func _ready() -> void:
 	hide()
 	$Press.hide()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(0))
+	await get_tree().create_timer(0.1).timeout
 	
 	# Initialize default keybinds for each action.
 	for keybind in KEYBINDS:

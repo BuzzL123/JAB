@@ -12,5 +12,5 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_END):
 		get_tree().change_scene_to_file("res://World's/Test stage.tscn")
 #	press "key" to go to Title Screen
-	if Input.is_key_pressed(KEY_ESCAPE):
+	if Input.is_key_pressed(KEY_ESCAPE)|| Input.is_joy_button_pressed(0,JOY_BUTTON_START):
 		get_tree().change_scene_to_file("res://UI/Title_Screen.tscn")

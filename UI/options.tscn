@@ -1,23 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2jd4kgm6of3u"]
+[gd_scene load_steps=7 format=3 uid="uid://d2jd4kgm6of3u"]
 
 [ext_resource type="Theme" uid="uid://b071l4h825547" path="res://UI/themes/menu_theme.tres" id="1_pseyc"]
 [ext_resource type="Script" path="res://UI/options.gd" id="1_sp3r7"]
-[ext_resource type="Texture2D" uid="uid://bhsf15bgco6me" path="res://Art/my art/UI/buton_off.png" id="2_gig11"]
-[ext_resource type="Texture2D" uid="uid://bajc3mj561wla" path="res://Art/my art/UI/buton_on.png" id="3_8ay68"]
 [ext_resource type="PackedScene" uid="uid://b5a6vy2qc1ku3" path="res://UI/Buttons/options_buttons/keybind.tscn" id="3_ji8s8"]
-[ext_resource type="Texture2D" uid="uid://dm1ducduojq42" path="res://Art/my art/UI/buton_disabled.png" id="5_fqneu"]
-[ext_resource type="Texture2D" uid="uid://b1vd8cgnfhxgm" path="res://Art/my art/UI/button_hover.png" id="6_ey7x5"]
 [ext_resource type="PackedScene" uid="uid://cbk4qkmo4gdne" path="res://background_music.tscn" id="7_rl5ro"]
 [ext_resource type="Script" path="res://UI/Press.gd" id="8_knlq1"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vp1v"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sqka3"]
 
 [node name="options" type="PopupPanel"]
+editor_description = "																													"
 position = Vector2i(837, 295)
 size = Vector2i(950, 620)
 visible = true
 theme = ExtResource("1_pseyc")
-theme_override_styles/panel = SubResource("StyleBoxEmpty_6vp1v")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_sqka3")
 script = ExtResource("1_sp3r7")
 Keybind = ExtResource("3_ji8s8")
 
@@ -29,6 +26,7 @@ offset_bottom = 620.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 12
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -36,23 +34,9 @@ text = "options"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Reset" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("2_gig11")
-texture_pressed = ExtResource("3_8ay68")
-texture_hover = ExtResource("6_ey7x5")
-texture_disabled = ExtResource("5_fqneu")
-texture_focused = ExtResource("3_8ay68")
-
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Reset"]
-layout_mode = 0
-offset_right = 700.0
-offset_bottom = 85.0
 text = "Reset"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
 
 [node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -75,9 +59,9 @@ unique_name_in_owner = true
 layout_mode = 2
 item_count = 2
 selected = 1
-popup/item_0/text = "Vsync Disabled"
+popup/item_0/text = " Vsync Disabled"
 popup/item_0/id = 0
-popup/item_1/text = "Vsync Enabled"
+popup/item_1/text = " Vsync Enabled"
 popup/item_1/id = 1
 
 [node name="HSeparator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
@@ -148,7 +132,7 @@ text = "Keybinds"
 horizontal_alignment = 1
 
 [node name="Press" type="AcceptDialog" parent="."]
-size = Vector2i(457, 133)
+size = Vector2i(457, 158)
 visible = true
 dialog_text = "[Press any button!]"
 script = ExtResource("8_knlq1")

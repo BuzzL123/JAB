@@ -49,8 +49,14 @@ func _process(delta):
 #This function is called every physics frame and handles the player's movement and gravity.
 func _physics_process(delta):
 	_apply_gravity(delta)
-	_apply_movement()
 
+	_apply_movement()
+	
+	if health <= 0:
+		# Player is dead
+		Hp_Bar.value = 0
+		health = 0
+		die()
 #This function applies gravity to the player's velocity.
 func _apply_gravity(delta):
 	# Apply gravity
@@ -63,6 +69,16 @@ func _apply_gravity(delta):
 
 #This function handles the player's movement.
 func _apply_movement():
+#	if not is_on_floor() && !health == 0:
+#		if(velocity.y >= 0) :
+#			anim.play("jump")
+#		elif(velocity.y <= 0):
+#			anim.play("fall")
+#	elif is_on_floor() && !health == 0:
+#		if(velocity.x == 0 ) :
+#			anim.play("idle")
+
+	
 	
 	# If the player presses the dash button and meets certain 
 	if Input.is_action_just_pressed("dash_%s" % [player_id]) && dash.can_dash && !dash.is_dashing():
@@ -85,6 +101,8 @@ func _apply_movement():
 	# Handle Jump.
 	# Handle jump and crouch inputs.
 	if Input.is_action_just_pressed("jump_%s" % [player_id]) and (is_on_floor() or jumps < MAX_JUMPS):
+		
+		
 		
 		velocity.y = JUMP_HEIGHT
 		jumps += 1
@@ -119,12 +137,15 @@ func _apply_movement():
 	velocity.x = direction * SPEED + knockback.x
 	
 	if direction:
-
-
+		anim.play("run")
 		if(velocity.x < 0):
 			scale.x = scale.y * -1 
 		elif(velocity.x > 0):
 			scale.x = scale.y * 1 
+	elif Input.is_action_pressed("JAB!_%s" % [player_id]):
+		weapon.attack()
+	else:
+		anim.play("idle")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -150,14 +171,15 @@ func hp():
 func take_damage(damage : int, knockback_strength : Vector2 = Vector2(0,0), stop_time : float = 0.25):
 	# Reduce the player's health by the damage amount
 	health -= damage
+	
+#	moved to _physics_process(delta)
+#	if health <= 0:
+#		# Player is dead
+#		Hp_Bar.value = 0
+#		health = 0
+#		die()
 
-	if health <= 0:
-		# Player is dead
-		Hp_Bar.value = 0
-		health = 0
-		die()
-
-	elif (knockback_strength != Vector2(0,0)):
+	if (knockback_strength != Vector2(0,0)):
 		# Apply knockback effect and make the player invulnerable for a short time
 		knockback = knockback_strength
 		
@@ -188,14 +210,15 @@ func die():
 	# Handle player death
 #	velocity.x = 0
 #	velocity.y = 0
+	
 	Hp_Bar.hide()
 	anim.play("Dead")
 	set_physics_process(false)
 	set_process_unhandled_input(false)
 	$CollisionBox.set_deferred("disabled", true)
 	$CollisionBox2.set_deferred("disabled", true)
-	await get_tree().create_timer(5).timeout
-	queue_free()
+
+#	queue_free()
 
 	#get_tree().change_scene_to_file("res://UI/GameOver.tscn")
 
