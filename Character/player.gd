@@ -49,7 +49,6 @@ func _process(delta):
 #This function is called every physics frame and handles the player's movement and gravity.
 func _physics_process(delta):
 	_apply_gravity(delta)
-
 	_apply_movement()
 	
 	if health <= 0:
@@ -69,11 +68,7 @@ func _apply_gravity(delta):
 
 #This function handles the player's movement.
 func _apply_movement():
-#	if not is_on_floor() && !health == 0:
-#		if(velocity.y >= 0) :
-#			anim.play("jump")
-#		elif(velocity.y <= 0):
-#			anim.play("fall")
+	
 #	elif is_on_floor() && !health == 0:
 #		if(velocity.x == 0 ) :
 #			anim.play("idle")
@@ -83,7 +78,7 @@ func _apply_movement():
 	# If the player presses the dash button and meets certain 
 	if Input.is_action_just_pressed("dash_%s" % [player_id]) && dash.can_dash && !dash.is_dashing():
 		dash.start_dash(dash_length)
-		
+		anim.play("dash")
 		# The following commented code was likely used to disable collisions during a dash.
 		
 #		set_collision_mask_value(3, false)
@@ -135,18 +130,33 @@ func _apply_movement():
 # Get the input direction and handle movement and sprite flipping.
 	var direction = Input.get_axis("left_%s" % [player_id], "right_%s" % [player_id])
 	velocity.x = direction * SPEED + knockback.x
-	
+	# FIXME: jab anim not work good help!!!!!!!!!!!!!!
 	if direction:
-		anim.play("run")
+		if is_on_floor():
+			anim.play("run")
+		if is_on_floor() && Input.is_action_pressed("JAB!_%s" % [player_id]):
+				weapon.attack()
 		if(velocity.x < 0):
 			scale.x = scale.y * -1 
 		elif(velocity.x > 0):
 			scale.x = scale.y * 1 
-	elif Input.is_action_pressed("JAB!_%s" % [player_id]):
-		weapon.attack()
+	
 	else:
-		anim.play("idle")
-
+		if is_on_floor():
+			if(velocity.x == 0):
+				anim.play("idle")
+				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+					weapon.attack()
+		elif not is_on_floor():
+			if(velocity.y >= 0) :
+				anim.play("fall")
+				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+					weapon.attack()
+			elif(velocity.y <= 0):
+				anim.play("jump")
+				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+					weapon.attack()
+				
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Handle unhandled input events

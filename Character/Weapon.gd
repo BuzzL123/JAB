@@ -9,6 +9,7 @@ const damage = 10  # Sets the amount of damage that this attack deals to enemies
 
 func attack():  # Defines a function to play the attack animation
 	anim.play("JAB!")
+	
 
 func _on_body_entered(body) -> void:  # Defines a function that is called when another object enters this object's area
 	if body.has_method("take_damage"):  # Checks if the body has a "take_damage" function
