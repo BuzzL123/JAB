@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5a6vy2qc1ku3"]
 
-[ext_resource type="Script" path="res://Keybind.gd" id="1_g8rh2"]
+[ext_resource type="Script" path="res://game_settings/settings/Keybind.gd" id="1_g8rh2"]
 [ext_resource type="PackedScene" uid="uid://qgwnafwu1fm3" path="res://UI/Buttons/options_buttons/keybind_action.tscn" id="2_ew3ca"]
 
 [node name="Keybind" type="VBoxContainer" groups=["keybinds"]]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://qgwnafwu1fm3"]
 
-[ext_resource type="Script" path="res://KeybindAction.gd" id="1_l2qma"]
+[ext_resource type="Script" path="res://game_settings/settings/KeybindAction.gd" id="1_l2qma"]
 
 [node name="KeybindAction" type="HBoxContainer"]
 offset_right = 40.0

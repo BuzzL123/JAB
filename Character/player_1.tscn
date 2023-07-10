@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://duxr8m8uisf2j"]
+[gd_scene load_steps=68 format=3 uid="uid://duxr8m8uisf2j"]
 
 [ext_resource type="Script" path="res://Character/player.gd" id="1_xxbmx"]
 [ext_resource type="Texture2D" uid="uid://hom1lut5t58p" path="res://Art/AssetPack-V1/Sprite Sheets/player jump 48x48.png" id="2_bf1tp"]
@@ -7,13 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://0pb525cuxhwn" path="res://Art/AssetPack-V1/Sprite Sheets/Character Idle 48x48.png" id="3_tiadq"]
 [ext_resource type="Texture2D" uid="uid://b82sy4frf4p5b" path="res://Art/Asset Pack-V2 (Final)/Asset Pack-V2/Crouch-Walk/Crouch-Idle/Player Crouch-Idle 48x48.png" id="4_qwwr4"]
 [ext_resource type="Texture2D" uid="uid://c224bajj88fif" path="res://Art/AssetPack-V1/Sprite Sheets/run cycle 48x48.png" id="4_um8sx"]
-[ext_resource type="Script" path="res://Character/Weapon.gd" id="8_k23g6"]
+[ext_resource type="PackedScene" uid="uid://dbp4dry37lfi" path="res://Character/weapon.tscn" id="9_dwvhw"]
 [ext_resource type="Texture2D" uid="uid://dmqx7ef8ehjcs" path="res://Art/my art/noting.png" id="9_i8e0i"]
 [ext_resource type="Texture2D" uid="uid://sfjrwv42smgw" path="res://Art/Pixel Health Bar Asset Pack 1 by Adwit Rahman/Pixel Health Bar 1/Pixel1_Healthbar_0002_pixel1_border.png" id="10_k76wh"]
 [ext_resource type="PackedScene" uid="uid://cjmolddfgfq6c" path="res://particles/death_particles.tscn" id="10_rebvq"]
 [ext_resource type="Texture2D" uid="uid://qpkw88ej3sc6" path="res://Art/Pixel Health Bar Asset Pack 1 by Adwit Rahman/Pixel Health Bar 1/Pixel1_Healthbar_0001_pixel1_healthbar.png" id="11_7vatq"]
 [ext_resource type="PackedScene" uid="uid://bx2fl7ck2lk7l" path="res://Character/dash.tscn" id="12_d87hm"]
-[ext_resource type="PackedScene" uid="uid://chet007dpjn71" path="res://particles/blood_v.tscn" id="12_tun3x"]
 [ext_resource type="LabelSettings" uid="uid://bumqkgyuxj184" path="res://UI/Buttons/Menu_buttons/VersionLabel.tres" id="13_gy4sh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3p06p"]
@@ -372,7 +371,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_yqy81"]
 resource_name = "JAB!"
-length = 0.12
+length = 0.20001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -676,9 +675,6 @@ _data = {
 "run": SubResource("Animation_2uej7")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ubll"]
-size = Vector2(5, 2)
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_inav2"]
 particles_animation = true
 particles_anim_h_frames = 1
@@ -698,8 +694,6 @@ point_count = 2
 states/End/position = Vector2(1118, 95)
 states/Start/position = Vector2(10, 90)
 graph_offset = Vector2(-133, -60)
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ctwv7"]
 
 [node name="Player_1" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(2, 2)
@@ -734,17 +728,7 @@ libraries = {
 "": SubResource("AnimationLibrary_b5x5x")
 }
 
-[node name="Weapon" type="Area2D" parent="."]
-script = ExtResource("8_k23g6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon"]
-position = Vector2(13.5, 0)
-shape = SubResource("RectangleShape2D_6ubll")
-disabled = true
-debug_color = Color(1, 0, 0.121569, 0.258824)
-
-[node name="blood_v" parent="Weapon" instance=ExtResource("12_tun3x")]
-position = Vector2(16, 0)
+[node name="Weapon" parent="." instance=ExtResource("9_dwvhw")]
 
 [node name="death_Particles" parent="." instance=ExtResource("10_rebvq")]
 material = SubResource("CanvasItemMaterial_inav2")
@@ -774,7 +758,6 @@ visible = false
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_75s0m")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ctwv7")
 
 [node name="RayCasts" type="Node2D" parent="."]
 
@@ -815,5 +798,3 @@ offset_right = 15.0
 offset_bottom = -16.5
 text = "test"
 label_settings = ExtResource("13_gy4sh")
-
-[connection signal="body_entered" from="Weapon" to="Weapon" method="_on_body_entered"]

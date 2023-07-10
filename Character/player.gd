@@ -78,7 +78,7 @@ func _apply_movement():
 	# If the player presses the dash button and meets certain 
 	if Input.is_action_just_pressed("dash_%s" % [player_id]) && dash.can_dash && !dash.is_dashing():
 		dash.start_dash(dash_length)
-		anim.play("dash")
+#		anim.play("dash")
 		# The following commented code was likely used to disable collisions during a dash.
 		
 #		set_collision_mask_value(3, false)
@@ -132,30 +132,30 @@ func _apply_movement():
 	velocity.x = direction * SPEED + knockback.x
 	# FIXME: jab anim not work good help!!!!!!!!!!!!!!
 	if direction:
-		if is_on_floor():
-			anim.play("run")
-		if is_on_floor() && Input.is_action_pressed("JAB!_%s" % [player_id]):
-				weapon.attack()
+#		if is_on_floor():
+#			anim.play("run")
+#		if is_on_floor() && Input.is_action_pressed("JAB!_%s" % [player_id]):
+#				weapon.attack()
 		if(velocity.x < 0):
 			scale.x = scale.y * -1 
 		elif(velocity.x > 0):
 			scale.x = scale.y * 1 
 	
-	else:
-		if is_on_floor():
-			if(velocity.x == 0):
-				anim.play("idle")
-				if Input.is_action_pressed("JAB!_%s" % [player_id]):
-					weapon.attack()
-		elif not is_on_floor():
-			if(velocity.y >= 0) :
-				anim.play("fall")
-				if Input.is_action_pressed("JAB!_%s" % [player_id]):
-					weapon.attack()
-			elif(velocity.y <= 0):
-				anim.play("jump")
-				if Input.is_action_pressed("JAB!_%s" % [player_id]):
-					weapon.attack()
+#	else:
+#		if is_on_floor():
+#			if(velocity.x == 0):
+#				anim.play("idle")
+#				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+#					weapon.attack()
+#		elif not is_on_floor():
+#			if(velocity.y >= 0) :
+#				anim.play("fall")
+#				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+#					weapon.attack()
+#			elif(velocity.y <= 0):
+#				anim.play("jump")
+#				if Input.is_action_pressed("JAB!_%s" % [player_id]):
+#					weapon.attack()
 				
 
 func _unhandled_input(event: InputEvent) -> void:

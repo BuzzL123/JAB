@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://UI/Title_Screen.gd" id="1_r8a35"]
 [ext_resource type="PackedScene" uid="uid://c25bi0nhqgux7" path="res://UI/Buttons/Menu_buttons/local_multiplayer_button.tscn" id="2_0o63b"]
-[ext_resource type="Texture2D" uid="uid://bl7kfgsfh6ado" path="res://Art/my art/UI/JAB!_logo.png" id="2_ofraw"]
+[ext_resource type="Texture2D" uid="uid://bl7kfgsfh6ado" path="res://Art/my art/JAB!_logo.png" id="2_ofraw"]
 [ext_resource type="Theme" uid="uid://b071l4h825547" path="res://UI/themes/menu_theme.tres" id="3_q8hsy"]
 [ext_resource type="PackedScene" uid="uid://qc12uus7oq5r" path="res://UI/Buttons/Menu_buttons/options_button.tscn" id="3_s5pqq"]
 [ext_resource type="PackedScene" uid="uid://x4usss1cvbs5" path="res://UI/Buttons/Menu_buttons/quit_button.tscn" id="4_jovrl"]
@@ -244,7 +244,7 @@ layer_0/tile_data = PackedInt32Array(983062, 524289, 0, 983061, 458753, 0, 98306
 [node name="VersionLabel" type="Label" parent="Menu"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Version 0.0.0
+text = "Version 0.0.1 Beta
 BizBuzz Studio"
 label_settings = ExtResource("5_mqf5w")
 

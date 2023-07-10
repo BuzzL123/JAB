@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bx2fl7ck2lk7l"]
 
-[ext_resource type="Script" path="res://Dash.gd" id="1_22r2p"]
+[ext_resource type="Script" path="res://Character/Dash.gd" id="1_22r2p"]
 
 [node name="Dash" type="Node2D"]
 script = ExtResource("1_22r2p")
